@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio Profissional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0f;
+            --card-bg: #12121a;
+            --accent-color: #00d4ff; /* Ciano Sutil */
+            --text-main: #ffffff;
+            --text-dim: #a0a0aa;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Source Sans 3', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo { font-weight: 700; font-size: 1.2rem; color: var(--accent-color); }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* Hero Section */
+        section { padding: 100px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        
+        .hero { text-align: left; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 1rem; }
+        .hero p { color: var(--text-dim); max-width: 600px; font-size: 1.2rem; margin-bottom: 2.5rem; }
+        
+        .btn-container { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        .btn-primary { background: var(--accent-color); color: #000; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2); }
+        .btn-secondary { border: 1px solid rgba(255,255,255,0.1); color: white; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.05); }
+
+        /* Projetos Grid */
+        .section-title { font-size: 2rem; margin-bottom: 3rem; position: relative; }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -10px;
+            width: 50px; height: 3px;
+            background: var(--accent-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .card h3 { margin-bottom: 1rem; color: var(--accent-color); }
+        .card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        
+        .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .tag {
+            font-size: 0.7rem;
+            background: rgba(255,255,255,0.05);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Animação de Scroll */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        footer {
+            padding: 4rem 10%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; }
+            .nav-links { display: none; }
+            section { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">DEV.PORTFOLIO</div>
+        <div class="nav-links">
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#projetos">Projetos</a>
+        </div>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <h1 class="reveal">Olá, eu sou <span style="color: var(--accent-color);">Seu Nome</span>.</h1>
+        <p class="reveal">Desenvolvedor e Analista de Dados focado em criar soluções eficientes e transformar dados em decisões estratégicas.</p>
+        <div class="btn-container reveal">
+            <a href="#projetos" class="btn btn-primary">Ver Meus Projetos</a>
+            <a href="#" class="btn btn-secondary">LinkedIn</a>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <h2 class="section-title reveal">Sobre Mim</h2>
+        <div class="reveal" style="max-width: 800px;">
+            <p style="margin-bottom: 1.5rem;">Sou apaixonado por tecnologia e estou constantemente aprimorando minhas habilidades em desenvolvimento de software e análise de dados. Busco criar aplicações que não apenas funcionem, mas que ofereçam uma experiência excepcional ao usuário.</p>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">SQL</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">HTML/CSS</span>
+                <span class="tag">Git</span>
+                <span class="tag">Node.js</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projetos">
+        <h2 class="section-title reveal">Projetos em Destaque</h2>
+        <div class="grid">
+            <article class="card reveal">
+                <h3>Monitor de Humor</h3>
+                <p>Uma aplicação web para registro diário de sentimentos, utilizando armazenamento local para manter a privacidade do usuário.</p>
+                <div class="tags">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">JS</span>
+                </div>
+            </article>
+
+            <article class="card reveal">
+                <h3>Análise de Dados</h3>
+                <p>Projeto de exploração e visualização de dados utilizando bibliotecas modernas para extrair insights valiosos.</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                </div>
+            </article>
+
+            <article class="card reveal">
+                <h3>Automação de Processos</h3>
+                <p>Script desenvolvido para otimizar tarefas repetitivas, reduzindo o tempo de execução em até 80%.</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Automation</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 • Criado com dedicação por Seu Nome</p>
+    </footer>
+
+    <script>
+        // Animação de entrada ao fazer scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
