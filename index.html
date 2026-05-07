@@ -1,231 +1,301 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio Profissional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0a0a0f;
-            --card-bg: #12121a;
-            --accent-color: #00d4ff; /* Ciano Sutil */
-            --text-main: #ffffff;
-            --text-dim: #a0a0aa;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoje eu tô...</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Source Sans 3', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6a1b9a, #9c27b0);
+      min-height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 50px;
+    }
 
-        h1, h2, h3 {
-            font-family: 'Outfit', sans-serif;
-            letter-spacing: -0.02em;
-        }
+    .container { width: 100%; max-width: 500px; padding: 20px; }
 
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    header { text-align: center; padding: 30px 0 10px; }
+    h1 { font-size: 2.5rem; font-weight: 700; }
+    .subtitle { opacity: 0.9; margin-bottom: 20px; }
 
-        .logo { font-weight: 700; font-size: 1.2rem; color: var(--accent-color); }
-        .nav-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        .nav-links a:hover { color: var(--accent-color); }
+    .main {
+      background: white;
+      color: #333;
+      border-radius: 24px;
+      padding: 25px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
 
-        /* Hero Section */
-        section { padding: 100px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        
-        .hero { text-align: left; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 1rem; }
-        .hero p { color: var(--text-dim); max-width: 600px; font-size: 1.2rem; margin-bottom: 2.5rem; }
-        
-        .btn-container { display: flex; gap: 1rem; flex-wrap: wrap; }
-        .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-        .btn-primary { background: var(--accent-color); color: #000; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2); }
-        .btn-secondary { border: 1px solid rgba(255,255,255,0.1); color: white; }
-        .btn-secondary:hover { background: rgba(255,255,255,0.05); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
 
-        /* Projetos Grid */
-        .section-title { font-size: 2rem; margin-bottom: 3rem; position: relative; }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0; bottom: -10px;
-            width: 50px; height: 3px;
-            background: var(--accent-color);
-        }
+    .card {
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 15px;
+      padding: 15px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+    .card:active { transform: scale(0.95); }
+    .card.selecionado { border-color: #9c27b0; background: #f3e5f5; }
 
-        .card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.03);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-        .card h3 { margin-bottom: 1rem; color: var(--accent-color); }
-        .card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
-        
-        .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .tag {
-            font-size: 0.7rem;
-            background: rgba(255,255,255,0.05);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .emoji { font-size: 2.5rem; display: block; }
+    .texto { font-size: 0.9rem; font-weight: 600; }
 
-        /* Animação de Scroll */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+    #campoNota {
+      display: none;
+      margin-top: 20px;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
 
-        footer {
-            padding: 4rem 10%;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            color: var(--text-dim);
-            font-size: 0.8rem;
-        }
+    textarea {
+      width: 100%;
+      height: 80px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      padding: 12px;
+      font-family: inherit;
+      resize: none;
+      margin: 10px 0;
+    }
 
-        @media (max-width: 768px) {
-            nav { padding: 1rem 5%; }
-            .nav-links { display: none; }
-            section { padding: 80px 5%; }
-        }
-    </style>
+    .btn-salvar {
+      width: 100%;
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .frase-impacto {
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 12px;
+      background: #f3e5f5;
+      color: #6a1b9a;
+      font-style: italic;
+      font-size: 0.95rem;
+      text-align: center;
+      display: none;
+      border-left: 5px solid #9c27b0;
+    }
+
+    .history-section {
+      margin-top: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 20px;
+      width: 100%;
+    }
+
+    .history-grid {
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 15px;
+      overflow-x: auto;
+      gap: 10px;
+      padding-bottom: 10px;
+    }
+
+    .history-item {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px;
+      border-radius: 12px;
+      min-width: 75px;
+      cursor: pointer;
+    }
+
+    .history-date { font-size: 0.65rem; display: block; margin-top: 5px; color: #eee; }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center; align-items: center;
+      z-index: 100; padding: 20px;
+    }
+
+    .modal-content {
+      background: white; color: #333; padding: 30px;
+      border-radius: 24px; max-width: 400px; width: 100%;
+      text-align: center; position: relative;
+    }
+
+    .modal-close { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
+
+    .reset-btn { background: none; border: none; color: #ffab91; cursor: pointer; text-decoration: underline; font-size: 0.8rem; margin-top: 20px; width: 100%; }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">DEV.PORTFOLIO</div>
-        <div class="nav-links">
-            <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#projetos">Projetos</a>
-        </div>
-    </nav>
+<div class="container">
+  <header>
+    <h1>Hoje eu tô...</h1>
+    <p class="subtitle">Registre seu momento, a qualquer hora.</p>
+  </header>
 
-    <section id="inicio" class="hero">
-        <h1 class="reveal">Olá, eu sou <span style="color: var(--accent-color);">Seu Nome</span>.</h1>
-        <p class="reveal">Desenvolvedor e Analista de Dados focado em criar soluções eficientes e transformar dados em decisões estratégicas.</p>
-        <div class="btn-container reveal">
-            <a href="#projetos" class="btn btn-primary">Ver Meus Projetos</a>
-            <a href="#" class="btn btn-secondary">LinkedIn</a>
-        </div>
-    </section>
+  <div class="main">
+    <div class="grid" id="gridHumores"></div>
+    
+    <div id="fraseEmocional" class="frase-impacto"></div>
 
-    <section id="sobre">
-        <h2 class="section-title reveal">Sobre Mim</h2>
-        <div class="reveal" style="max-width: 800px;">
-            <p style="margin-bottom: 1.5rem;">Sou apaixonado por tecnologia e estou constantemente aprimorando minhas habilidades em desenvolvimento de software e análise de dados. Busco criar aplicações que não apenas funcionem, mas que ofereçam uma experiência excepcional ao usuário.</p>
-            <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">SQL</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">HTML/CSS</span>
-                <span class="tag">Git</span>
-                <span class="tag">Node.js</span>
-            </div>
-        </div>
-    </section>
+    <div id="campoNota">
+      <p style="font-size: 0.9rem; font-weight: 600;">O que está acontecendo agora?</p>
+      <textarea id="textoMotivo" placeholder="Desabafe aqui..."></textarea>
+      <button class="btn-salvar" onclick="finalizarRegistro()">Salvar Momento</button>
+    </div>
+  </div>
 
-    <section id="projetos">
-        <h2 class="section-title reveal">Projetos em Destaque</h2>
-        <div class="grid">
-            <article class="card reveal">
-                <h3>Monitor de Humor</h3>
-                <p>Uma aplicação web para registro diário de sentimentos, utilizando armazenamento local para manter a privacidade do usuário.</p>
-                <div class="tags">
-                    <span class="tag">HTML5</span>
-                    <span class="tag">CSS3</span>
-                    <span class="tag">JS</span>
-                </div>
-            </article>
+  <div class="history-section">
+    <h3 style="font-size: 1rem; text-align: center;">Linha do tempo</h3>
+    <div class="history-grid" id="historico"></div>
+  </div>
 
-            <article class="card reveal">
-                <h3>Análise de Dados</h3>
-                <p>Projeto de exploração e visualização de dados utilizando bibliotecas modernas para extrair insights valiosos.</p>
-                <div class="tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Pandas</span>
-                </div>
-            </article>
+  <button class="reset-btn" onclick="resetarTudo()">Apagar todo o histórico</button>
+</div>
 
-            <article class="card reveal">
-                <h3>Automação de Processos</h3>
-                <p>Script desenvolvido para otimizar tarefas repetitivas, reduzindo o tempo de execução em até 80%.</p>
-                <div class="tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Automation</span>
-                </div>
-            </article>
-        </div>
-    </section>
+<div id="modalDiario" class="modal" onclick="fecharModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="modal-close" onclick="fecharModal()">&times;</span>
+    <div id="modalEmoji" style="font-size: 4rem;"></div>
+    <h2 id="modalData" style="margin: 10px 0; color: #6a1b9a; font-size: 1.2rem;"></h2>
+    <p id="modalTexto" style="line-height: 1.6; color: #555; background: #f9f9f9; padding: 15px; border-radius: 12px; text-align: left;"></p>
+  </div>
+</div>
 
-    <footer>
-        <p>&copy; 2024 • Criado com dedicação por Seu Nome</p>
-    </footer>
+<script>
+  const humores = [
+    { emoji: "😊", texto: "Tô de boa", frase: "Que bom que as coisas estão leves agora." },
+    { emoji: "🔥", texto: "Tô motivado", frase: "Use essa energia para realizar algo incrível!" },
+    { emoji: "😌", texto: "Tô tranquilo", frase: "Aproveite esse momento de paz interior." },
+    { emoji: "😩", texto: "Tô cansado", frase: "Não tem problema parar um pouco. Recarregue." },
+    { emoji: "😤", texto: "Tô estressado", frase: "Respire fundo. Esse sentimento é passageiro." },
+    { emoji: "🥲", texto: "Tô na luta", frase: "Você é mais forte do que imagina. Continue!" },
+    { emoji: "💸", texto: "Tô quebrado", frase: "Fases difíceis vêm, mas também vão. Persista." },
+    { emoji: "😴", texto: "Tô com sono", frase: "Dê ao seu corpo o descanso que ele merece." }
+  ];
 
-    <script>
-        // Animação de entrada ao fazer scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
+  let humorSelecionado = null;
 
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-    </script>
+  function init() {
+    renderizarCards();
+    atualizarHistorico();
+  }
+
+  function renderizarCards() {
+    const grid = document.getElementById('gridHumores');
+    grid.innerHTML = humores.map(h => `
+      <div class="card" id="card-${h.emoji}" onclick="selecionarHumor('${h.emoji}')">
+        <span class="emoji">${h.emoji}</span>
+        <span class="texto">${h.texto}</span>
+      </div>
+    `).join('');
+  }
+
+  function selecionarHumor(emoji) {
+    humorSelecionado = emoji;
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selecionado'));
+    document.getElementById(`card-${emoji}`).classList.add('selecionado');
+    
+    // Mostra a frase emocional na hora
+    const fraseDiv = document.getElementById('fraseEmocional');
+    fraseDiv.innerText = humores.find(h => h.emoji === emoji).frase;
+    fraseDiv.style.display = 'block';
+    
+    document.getElementById('campoNota').style.display = 'block';
+    document.getElementById('textoMotivo').focus();
+  }
+
+  function finalizarRegistro() {
+    const motivo = document.getElementById('textoMotivo').value;
+    const agora = new Date();
+    const dataFormatada = agora.toLocaleDateString('pt-BR');
+    const horaFormatada = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    
+    const novoRegistro = {
+      id: Date.now(),
+      data: dataFormatada,
+      hora: horaFormatada,
+      emoji: humorSelecionado,
+      motivo: motivo || "Apenas registrei o humor.",
+    };
+
+    let historico = JSON.parse(localStorage.getItem('meuHistorico') || "[]");
+    historico.push(novoRegistro);
+    localStorage.setItem('meuHistorico', JSON.stringify(historico));
+
+    // Reset interface
+    document.getElementById('textoMotivo').value = '';
+    document.getElementById('campoNota').style.display = 'none';
+    document.getElementById('fraseEmocional').style.display = 'none';
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selecionado'));
+    
+    atualizarHistorico();
+  }
+
+  function atualizarHistorico() {
+    const lista = JSON.parse(localStorage.getItem('meuHistorico') || "[]");
+    const container = document.getElementById('historico');
+    
+    if (lista.length === 0) {
+      container.innerHTML = "<p style='font-size: 0.8rem; opacity: 0.6;'>Seu histórico aparecerá aqui.</p>";
+      return;
+    }
+
+    container.innerHTML = lista.slice().reverse().map(item => `
+      <div class="history-item" onclick="abrirDia(${item.id})">
+        <span style="font-size: 1.5rem;">${item.emoji}</span>
+        <span class="history-date">${item.data.split('/')[0]}/${item.data.split('/')[1]} às ${item.hora}</span>
+      </div>
+    `).join('');
+  }
+
+  function abrirDia(id) {
+    const historico = JSON.parse(localStorage.getItem('meuHistorico'));
+    const registro = historico.find(h => h.id === id);
+    
+    if (registro) {
+      document.getElementById('modalEmoji').innerText = registro.emoji;
+      document.getElementById('modalData').innerText = `${registro.data} às ${registro.hora}`;
+      document.getElementById('modalTexto').innerText = registro.motivo;
+      document.getElementById('modalDiario').style.display = 'flex';
+    }
+  }
+
+  function fecharModal() {
+    document.getElementById('modalDiario').style.display = 'none';
+  }
+
+  function resetarTudo() {
+    if (confirm("Deseja apagar todos os registros permanentemente?")) {
+      localStorage.removeItem('meuHistorico');
+      location.reload();
+    }
+  }
+
+  window.onload = init;
+</script>
 </body>
 </html>
